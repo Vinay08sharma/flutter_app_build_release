@@ -7,6 +7,9 @@ on:
     branches:
       - main
       - master
+env:
+  flutter_version: "3.3.9"
+
 name: "Build & release"
 jobs:
   build:
@@ -19,10 +22,14 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.2.0'
-      - run: flutter upgrade    
+          flutter-version: ${{ env.flutter_version }}
+          channel: 'stable'
+          cache: true
+          cache-key: flutterA-${{ env.flutter_version }}
+          cache-path: ${{ runner.tool_cache }}/flutterA-${{ env.flutter_version }}
+      # - run: flutter upgrade    
       - run: flutter pub get
-      - run: flutter test test_driver/e2e_test.dart
+      - run: flutter test
       - run: flutter build apk --debug --split-per-abi
       - name: Push to Releases
         uses: ncipollo/release-action@v1
