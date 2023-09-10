@@ -10,7 +10,7 @@ on:
 name: "Build & release"
 jobs:
   build:
-    name: Build & release"
+    name: Build & release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
