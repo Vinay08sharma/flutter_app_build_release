@@ -27,7 +27,7 @@ jobs:
           cache: true
           cache-key: flutterA-${{ env.flutter_version }}
           cache-path: ${{ runner.tool_cache }}/flutterA-${{ env.flutter_version }}
-      # - run: flutter upgrade    
+      - run: flutter upgrade    
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk --debug --split-per-abi
