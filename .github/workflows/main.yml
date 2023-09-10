@@ -14,7 +14,7 @@ name: "Build & release"
 jobs:
   build:
     name: Build & release
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
@@ -27,9 +27,8 @@ jobs:
           cache: true
           cache-key: flutterA-${{ env.flutter_version }}
           cache-path: ${{ runner.tool_cache }}/flutterA-${{ env.flutter_version }}
-      - name: Download Flutter Dependencies
-        run:  |
-            flutter pub get
+    
+      - run: flutter pub get
       - run: flutter test
       - run: flutter build apk --debug --split-per-abi
       - name: Push to Releases
